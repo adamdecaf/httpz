@@ -16,3 +16,19 @@ A simple abstraction layer above http with the use of scalaz.
     file -- Add that file as contents for a PUT
     \:/ -- Merge two requests on the union of their properties
     /:\ -- Merge two requests based on the intersection of their properties
+
+## Features
+
+* Completely non-blocking
+* Wrapped around futures and async code
+* Http library independent
+* JSON library independent
+* XML library independent
+
+## Future
+
+* Handle response headers
+* Provide a layer to handle exceptions during the request
+* Treat the response as a json object
+* Treat the response as a xml object
+* Get certain properties directly from the request and response
