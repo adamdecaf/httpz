@@ -20,8 +20,8 @@ A simple abstraction layer above http with the use of scalaz.
 
     Response Methods
     >>:: -- Process headers
-    json-> -- Process the response as json
-    xml-> -- Process the response as xml
+    json_> -- Process the response as json
+    xml_> -- Process the response as xml
 
 
 ## Features
