@@ -17,6 +17,7 @@ trait HttpVerbHandler {
 sealed trait HttpStatus
 case object Okay extends HttpStatus { override def toString() = "HttpStatus: Okay 200" }
 
+// Use Tagged types to declare status codes??
 // case object 200 extends HttpStatus { override def toString() = "Okay" }
 // case object 201 extends HttpStatus { override def toString() = "Created" }
 // case object 202 extends HttpStatus { override def toString() = "Accepted" }
