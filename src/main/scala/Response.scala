@@ -8,4 +8,12 @@ case class Response(response: String, headers: Iterable[Pair[String, String]], h
   def json_>[T](f: String => T) = f(response)
   def xml_>[T](f: String => T) = f(response)
 
+  // These should only evaluate when the request is completed
+  //def flatMap
+  //def map
+
+  // def onComplete
+  // def onSuccess
+  // def onFailure
+
 }
