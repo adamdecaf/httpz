@@ -1,18 +1,12 @@
 package httpz
 
 object host {
-  // TODO: Do some detection on this to
-  // a) confirm it's a valid uri
-  // b) figure out the port
-  def apply(s: NonEmptyString): Request = new Request(s, 80, Vector())
+  def apply(uri: String): Request = new Request(uri)
 }
 
-// Maybe headers should be a more solidified type. Or a Pair[Stirng, String]*
-case class Request(uri: NonEmptyString, port: Int, headers: Headers) {
+case class Request(uri: String, port: Int = defaultHttpPort, headers: Headers = emptyHeaders) {
 
-  def port_=(port: Int): Request = {
-    Request(uri, port, Nil)
-  }
+  def port_=(port: Int): Request = Request(uri, port, headers)
 
   def /(path: String): Request = {
     val extraSlash = if (!uri.endsWith("/") && !path.startsWith("/")) "/" else ""
@@ -40,5 +34,4 @@ case class Request(uri: NonEmptyString, port: Int, headers: Headers) {
   def /:\(other: Request): Request = {
     other
   }
-
 }

@@ -2,22 +2,18 @@
  * httpz package object
  */
 
-import scalaz.{@@, Tag, Validation}
+import scalaz.Validation
 
 package object httpz {
 
-  // TODO: Make these be nonEmpty also
+  // Common types
   type Headers = Iterable[Pair[String, String]]
   type UrlParams = Iterable[Pair[String, String]]
 
-  sealed trait NonEmpty
-  type NonEmptyString = String @@ NonEmpty
+  // Default, config values
+  val defaultHttpPort = 80
+  def emptyHeaders: Iterable[Pair[String, String]] = List()
 
+  // Validation
   type HttpValidation = Validation[String, String]
-
-  // TODO:
-  implicit def stringToNonEmptyString(s: String): NonEmptyString = {
-    if (s.length > 0) Tag[String, NonEmpty](s)
-    else throw EmptyStringException
-  }
 }

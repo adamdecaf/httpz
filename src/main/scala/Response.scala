@@ -1,9 +1,11 @@
 package httpz
 
-import scalaz.{Success, Failure, Validation}
+import scalaz.{Success => success, Failure => failure, Validation}
 
-case class Response(response: String, headers: Iterable[Pair[String, String]], httpStatus: HttpStatus) {
-  def >>::[T](f: Iterable[Pair[String, String]] => T): T = f(headers)
+case class Response(response: String, headers: Headers, httpStatus: HttpStatus) {
+
+  // Operate on the headers
+  def >>::[T](f: Headers => T): T = f(headers)
 
   // Make these better later on
   def json_>[T](f: String => T) = f(response)
@@ -11,8 +13,8 @@ case class Response(response: String, headers: Iterable[Pair[String, String]], h
 
   // Define a way to get the scalaz or HttpValidation object
   def asScalaz: Validation[String, String] = httpStatus match {
-    case Okay => Success(response)
-    case Failure(_, _) => Failure(response) // Maybe find a better set of error messages? (Headers?)
+    case Okay => success(response)
+    case Failure(_, _) => failure(response) // Maybe find a better set of error messages? (Headers?)
   }
 
   def wrapped: HttpValidation = {
