@@ -16,6 +16,7 @@ private[httpz] trait HttpImplInterface {
 // Research this better to figure out a common api
 private[httpz] trait HttpContext
 private[httpz] trait ApacheHttpContext extends HttpContext
+private[httpz] trait NingHttpContext extends HttpContext
 
 private[httpz] trait HttpImpl extends HttpImplInterface {
   this: HttpContext =>

@@ -2,7 +2,7 @@
  * httpz package object
  */
 
-import scalaz.{@@, Tag}
+import scalaz.{@@, Tag, Validation}
 
 package object httpz {
 
@@ -12,6 +12,8 @@ package object httpz {
 
   sealed trait NonEmpty
   type NonEmptyString = String @@ NonEmpty
+
+  type HttpValidation = Validation[String, String]
 
   // TODO:
   implicit def stringToNonEmptyString(s: String): NonEmptyString = {

@@ -14,8 +14,26 @@ trait HttpVerbHandler {
     Request(uri, port, Nil)
 }
 
-sealed trait HttpStatus
-case object Okay extends HttpStatus { override def toString() = "HttpStatus: Okay 200" }
+sealed trait HttpStatus {
+  this: Any =>
+
+  val asNumber: Int
+  val asString: String
+  override def toString() = "HttpStatus: %s%s".format(asString, asNumber)
+}
+
+case object Okay extends HttpStatus {
+  val asNumber = 200
+  val asString = "Okay"
+}
+
+class Failure(val asNumber: Int, val asString: String) extends HttpStatus
+
+object Failure {
+  def apply(resp: Response): Failure = {
+    new Failure()
+  }
+}
 
 // Use Tagged types to declare status codes??
 // case object 200 extends HttpStatus { override def toString() = "Okay" }
