@@ -11,7 +11,7 @@ A simple abstraction layer above http with the use of scalaz.
     Request Methods
     GET / POST / PUT / DELETE / HEAD -- Init the http request
     / -- Add paths onto the request
-    :: -- specify the port on the request
+    port_= -- specify the port on the request
     *&* or <<?& -- Add url paramaters
     *:* or <<:: -- Add headers onto the request
     file -- Add that file as contents for a PUT
