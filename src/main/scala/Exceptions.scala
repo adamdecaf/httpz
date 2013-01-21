@@ -1,4 +1,0 @@
-package httpz
-
-trait NonEmptyValueExceptions extends Throwable
-case object EmptyStringException extends NonEmptyValueExceptions

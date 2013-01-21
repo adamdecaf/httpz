@@ -1,6 +1,10 @@
 package httpz
 
-import scalaz.{Success => success, Failure => failure, Validation}
+import scalaz.{Success, Failure, Validation}
+
+private[httpz] object Response {
+  def empty = Response("", List.empty, Okay)
+}
 
 case class Response(response: String, headers: Headers, httpStatus: HttpStatus) {
 
@@ -13,11 +17,12 @@ case class Response(response: String, headers: Headers, httpStatus: HttpStatus) 
 
   // Define a way to get the scalaz or HttpValidation object
   def asScalaz: Validation[String, String] = httpStatus match {
-    case Okay => success(response)
-    case Failure(_, _) => failure(response) // Maybe find a better set of error messages? (Headers?)
+    case Okay => Success(response)
+    case _    => Failure(response)
   }
 
+  // Use our non-scalaz wrapper around validation.
   def wrapped: HttpValidation = {
-    new HttpValidation(asScalaz(response))
+    new HttpValidation(asScalaz(response)){}
   }
 }

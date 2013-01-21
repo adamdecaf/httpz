@@ -2,8 +2,6 @@
  * httpz package object
  */
 
-import scalaz.Validation
-
 package object httpz {
 
   // Common types
@@ -12,8 +10,6 @@ package object httpz {
 
   // Default, config values
   val defaultHttpPort = 80
-  def emptyHeaders: Iterable[Pair[String, String]] = List()
+  def emptyHeaders: Iterable[Pair[String, String]] = List.empty
 
-  // Validation
-  type HttpValidation = Validation[String, String]
 }

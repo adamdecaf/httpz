@@ -1,0 +1,5 @@
+# httpz
+
+- Use scalaz validations to validate every value that comes in
+- Use scalaz validations to validate http responses
+- Integrate any layer of http client

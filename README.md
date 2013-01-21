@@ -15,8 +15,8 @@ A simple abstraction layer above http with the use of scalaz.
     *&* or <<?& -- Add url paramaters
     *:* or <<:: -- Add headers onto the request
     file -- Add that file as contents for a PUT
-    \:/ -- Merge two requests on the union of their properties
-    /:\ -- Merge two requests based on the intersection of their properties
+    \/ -- Merge two requests on the union of their properties
+    /\ -- Merge two requests based on the intersection of their properties
 
     Response Methods
     >>:: -- Process headers

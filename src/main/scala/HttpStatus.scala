@@ -1,19 +1,5 @@
 package httpz
 
-object GET extends HttpVerbHandler
-object POST extends HttpVerbHandler
-object PUT extends HttpVerbHandler
-object DELETE extends HttpVerbHandler
-object HEAD extends HttpVerbHandler
-
-trait HttpVerbHandler {
-  def apply(uri: String): Request =
-    Request(uri, 80, Nil)
-
-  def apply(uri: String, port: Int): Request =
-    Request(uri, port, Nil)
-}
-
 sealed trait HttpStatus {
   this: Any =>
 
@@ -27,13 +13,13 @@ case object Okay extends HttpStatus {
   val asString = "Okay"
 }
 
-class Failure(val asNumber: Int, val asString: String) extends HttpStatus
+// case class Failure(asNumber: Int, asString: String) extends HttpStatus
 
-object Failure {
-  def apply(resp: Response): Failure = {
-    new Failure()
-  }
-}
+// object Failure {
+//   def apply(resp: Response): Failure = {
+//     new Failure()
+//   }
+// }
 
 // Use Tagged types to declare status codes??
 // case object 200 extends HttpStatus { override def toString() = "Okay" }
