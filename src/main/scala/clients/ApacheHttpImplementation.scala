@@ -7,5 +7,6 @@ trait ApacheHttpImplementationRepository extends HttpImplementationRepository {
 }
 
 trait ApacheHttpImplementationComponent extends HttpImplementationComponent {
-  lazy val httpRepository = new ApacheHttpImplementationRepository{}
+  //lazy val httpRepository = new ApacheHttpImplementationRepository{}
+  def httpRepository: ApacheHttpImplementationRepository
 }

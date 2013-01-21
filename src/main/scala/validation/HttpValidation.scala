@@ -6,6 +6,6 @@ class HttpValidation extends HttpzValidation[Headers]
 
 trait HttpValidationRepository {
 
-  def validateHeaders(f: String => )
+  //def validateHeaders(f: String => )
 
 }

@@ -23,6 +23,7 @@ case class Response(response: String, headers: Headers, httpStatus: HttpStatus) 
 
   // Use our non-scalaz wrapper around validation.
   def wrapped: HttpValidation = {
-    new HttpValidation(asScalaz(response)){}
+    //new HttpValidation(asScalaz(response)){}
+    new HttpValidation()
   }
 }

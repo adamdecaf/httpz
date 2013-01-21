@@ -4,9 +4,9 @@ organization := "httpz"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.10.0-M7"
+scalaVersion := "2.10.0"
 
-crossScalaVersions := Seq("2.9.1", "2.9.2")
+crossScalaVersions := Seq("2.9.1", "2.9.2", "2.10.0")
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
@@ -16,6 +16,6 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "org.scalaz" % "scalaz-core_2.10.0-M7" % "7.0.0-M3",
-  "org.specs2" % "specs2_2.10.0-M7" % "1.12.1.1" % "test"
+  "org.scalaz" %% "scalaz-core" % "7.0.0-M7",
+  "org.specs2" %% "specs2" % "1.13" % "test"
 )

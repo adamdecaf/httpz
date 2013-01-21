@@ -7,5 +7,6 @@ trait AsyncClientHttpImplementationRepository extends HttpImplementationReposito
 }
 
 trait AsyncClientHttpImplementationComponent extends HttpImplementationComponent {
-  lazy val httpRepository = new AsyncClientHttpImplementationRepository{}
+  //lazy val httpRepository = new AsyncClientHttpImplementationRepository{}
+  def httpRepository: AsyncClientHttpImplementationRepository
 }

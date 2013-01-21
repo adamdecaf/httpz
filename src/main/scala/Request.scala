@@ -27,13 +27,13 @@ case class Request(uri: String, port: Int = defaultHttpPort, headers: Headers = 
   }
 
   def +=(headers: Headers): Request = this *:* headers
-  def +=(params: UrlParams): Request = this *&* params
+  // def +=(params: UrlParams): Request = this *&* params
 
-  def -=(headers: Headers): Request
-  def -=(params: UrlParams): Request
+  // def -=(headers: Headers): Request = this *:* headers
+  // def -=(params: UrlParams): Request = this *&* params
 
-  def addHeaders(headers: Headers): Request = this += headers
-  def addUrlParams(params: UrlParams): Request = this += params
+  // def addHeaders(headers: Headers): Request = this += headers
+  // def addUrlParams(params: UrlParams): Request = this += params
 
   // Merge two requests based on the union of their properties
   def \/(other: Request): Request = {
@@ -42,6 +42,7 @@ case class Request(uri: String, port: Int = defaultHttpPort, headers: Headers = 
 
   // Merge two requests based on the intersection of their properties
   def /\(other: Request): Request = {
-    Request(this.uri, this.port, this.headers.filter(other.headers.contains(_)))
+    //Request(this.uri, this.port, this.headers.filter(other.headers.contains(_)))
+    Request(this.uri, this.port, this.headers)
   }
 }

@@ -6,7 +6,7 @@ import scalaz.{Success, Failure, Validation}
 
 class HttpzValidation[T] {
 
-  def isSuccess =
+  //def isSuccess =
 
 }
 
