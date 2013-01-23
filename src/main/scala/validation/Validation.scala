@@ -4,11 +4,11 @@ import scalaz.{Success, Failure, Validation}
 
 // Generic validation objects
 
-class HttpzValidation[T] {
+//class HttpzValidation[T] {
 
   //def isSuccess =
 
-}
+//}
 
 // object HttpValidation {
 //   def apply(result: Validation[String, String]): HttpValidation =
