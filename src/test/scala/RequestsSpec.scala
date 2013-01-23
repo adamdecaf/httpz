@@ -33,7 +33,11 @@ object RequestsSpec extends Specification {
       (req setParams Map("name" -> "httpz", "date" -> "0")) === req.copy(uri = "http://google.com/some/path/?name=httpz&date=0")
     }
 
-    "work to add and get params" ! pending
+    "work to add and get params" in new context {
+      paramReq.getParams === "a=1&b=2"
+      //(req addParams(Map("a" -> "1", "b" -> "1")) getParams) === "a=1&b=1"
+    }
+
     "work to set headers" ! pending
     "work to add and get headers" ! pending
     "work to merge requests" ! pending
@@ -42,5 +46,6 @@ object RequestsSpec extends Specification {
   trait context extends Scope {
     val defaultRequest = Request("http://google.com")
     val req = Request("http://google.com/some/path/")
+    val paramReq = Request("http://google.com/some/path/?a=1&b=2")
   }
 }

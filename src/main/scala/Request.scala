@@ -30,13 +30,17 @@ object RequestOps {
       req.copy(uri = req.uri + "?" + paramString.drop(1))
     }
 
-    // def getParams(): Traversable[Pair[String, String]] = req.params match {
-    //   case Some(p) => p
-    //   case _       => Traversable.empty[Pair[String, String]]
-    // }
+    // todo: def getParams(): Traversable[Pair[String, String]]
+    def getParams(): String = req.uri.split("""\?""") match {
+      case Array(_, path) => path
+      case a => println(a.toList); ""
+    }
 
-    // def addParam(param: Pair[String, String])
-    // def addParams(param: Iterable[Pair[String, String]])
+    // Doesn't really work with existing params..
+    def addParams(p: Iterable[Pair[String, String]]): Request = {
+      val paramString = p.foldLeft(""){ (acc, pair) => acc + "&" + pair._1 + "=" + pair._2 }
+      req.copy(uri = req.uri + paramString)
+    }
 
     // def setHeaders(): Request =
     // def getHeaders(): Traversable[Pair[String, String]] = req.headers match {
