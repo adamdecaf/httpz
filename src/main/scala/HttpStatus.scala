@@ -26,7 +26,7 @@ object HttpStatus {
     case "404" => FileNotFound()
     case "405" => MethodNotAllowed()
     case "406" => NotAcceptable()
-    case "407" => ProxyAuthenticatioRequired()
+    case "407" => ProxyAuthenticationRequired()
     case "408" => RequestTimeout()
     case "409" => Conflict()
     case "410" => Gone()
@@ -41,7 +41,6 @@ object HttpStatus {
     case "428" => PreconditionRequired()
     case "429" => TooManyRequests()
     case "431" => RequestHeaderFieldsTooLarge()
-    case "444" => NoResponse()
     case "451" => UnavailableForLegalReasons()
 
     case "500" => InternalError()
@@ -104,7 +103,6 @@ case class UnprocessableEntity(val asNumber: Int = 422, val asString: String = "
 case class PreconditionRequired(val asNumber: Int = 428, val asString: String = "Precondition Required") extends HttpStatus
 case class TooManyRequests(val asNumber: Int = 429, val asString: String = "Too Many Requests") extends HttpStatus
 case class RequestHeaderFieldsTooLarge(val asNumber: Int = 431, val asString: String = "Request Header Fields Too Large") extends HttpStatus
-case class NoResponse(val asNumber: Int = 444, val asString: String = "No Response") extends HttpStatus
 case class UnavailableForLegalReasons(val asNumber: Int = 451, val asString: String = "Unavailable For Legal Reasons") extends HttpStatus
 
 case class InternalError(val asNumber: Int = 500, val asString: String = "Internal Error") extends HttpStatus
