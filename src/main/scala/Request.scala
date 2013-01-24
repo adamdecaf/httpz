@@ -4,6 +4,8 @@ object host {
   def apply(uri: String) = Request(uri)
 }
 
+// For these maybe use java.net.URI under a wrapper?
+
 object RequestOps {
   implicit final class RequestOpsWrapper(val req: Request) extends AnyVal {
 
@@ -23,6 +25,7 @@ object RequestOps {
       req.copy(uri = req.uri + maybeExtraSlash + path)
     }
 
+    // Doesn't really work on edge cases
     def setParams(params: Traversable[Pair[String, String]]): Request = {
       val paramString = params.foldLeft("") {
         (paramStr, pair) => paramStr + "&" + pair._1 + "=" + pair._2
@@ -37,23 +40,46 @@ object RequestOps {
     }
 
     // Doesn't really work with existing params..
-    def addParams(p: Iterable[Pair[String, String]]): Request = {
+    def addParams(p: Traversable[Pair[String, String]]): Request = {
       val paramString = p.foldLeft(""){ (acc, pair) => acc + "&" + pair._1 + "=" + pair._2 }
       req.copy(uri = req.uri + paramString)
     }
 
-    // def setHeaders(): Request =
-    // def getHeaders(): Traversable[Pair[String, String]] = req.headers match {
-    //   case Some(h) => h
-    //   case _       => Traversable.empty[Pair[String, String]]
-    // }
+    def setHeaders(headers: Traversable[Pair[String, String]]): Request = {
+      req.copy(headers = Some(headers))
+    }
 
-    // def addHeader(header: Pair[String, String])
-    // def addHeaders(headers: Iterable[Pair[String, String]])
+    def getHeaders(): Map[String, String] = req.headers match {
+      case Some(headers) => headers.toMap
+      case None          => Map.empty
+    }
 
-    // Non-default port is higher priority
-    // combine headers and postVals
-    // combine paths?
-    // def mergeRequests(req: Request)
+    def addHeaders(headers: Traversable[Pair[String, String]]): Request = req.headers match {
+      case Some(_) | None if (headers.isEmpty) => req
+      case Some(h)                             => req.copy(headers = Some(h ++ headers))
+      case None                                => req.copy(headers = Some(headers))
+    }
+
+    def setPostValues(values: Traversable[Pair[String, String]]): Request = {
+      req.copy(postValues = Some(values))
+    }
+
+    def getPostValues(): Traversable[Pair[String, String]] = req.postValues match {
+      case Some(pv) => pv
+      case None     => Iterable.empty
+    }
+
+    def addPostValues(values: Traversable[Pair[String, String]]): Request = req.postValues match {
+      case Some(_) | None if (values.isEmpty) => req
+      case Some(pv)                           => req.copy(postValues = Some(pv ++ values))
+      case None                               => req.copy(postValues = Some(values))
+    }
+
+    // Doesn't handle merging the paths or anything..
+    // req.addParams(other.getParams())
+    // Doesn't handle different ports..
+    def mergeWith(other: Request) = {
+      req.addHeaders(other.getHeaders()).addPostValues(other.getPostValues())
+    }
   }
 }

@@ -38,9 +38,19 @@ object RequestsSpec extends Specification {
       //(req addParams(Map("a" -> "1", "b" -> "1")) getParams) === "a=1&b=1"
     }
 
-    "work to set headers" ! pending
-    "work to add and get headers" ! pending
-    "work to merge requests" ! pending
+    "work to set headers" in new context {
+      req.setHeaders(Map("a" -> "1")).getHeaders() === Map("a" -> "1")
+    }
+
+    "work to add and get headers" in new context {
+      req.addHeaders(Map()) === req
+      req.addHeaders(Map("a" -> "1")).addHeaders(Map("b" -> "2")).getHeaders === Map("a" -> "1", "b" -> "2")
+    }
+
+    "work to merge requests" in new context {
+      val other = req.setHeaders(Map("a" -> "1")).setHeaders(Map("b" -> "2")).setPostValues(Map("c" -> "3"))
+      req.mergeWith(other) === other
+    }
   }
 
   trait context extends Scope {
