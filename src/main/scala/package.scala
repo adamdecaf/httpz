@@ -3,5 +3,8 @@
  */
 
 package object httpz {
-  import RequestOps._
+
+  //  Bring up the *Ops Value classes.
+  implicit def ImplicitRequestOpsWrapper(req: Request) = new RequestOpsWrapper(req)
+
 }

@@ -4,7 +4,6 @@ import org.specs2.specification.Scope
 import org.specs2.mutable.Specification
 
 object RequestsSpec extends Specification {
-  import RequestOps._
 
   "Building Requests" should {
     "work as expcted" in {
