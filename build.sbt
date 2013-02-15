@@ -4,9 +4,9 @@ organization := "httpz"
 
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.10.0-RC1"
+scalaVersion := "2.10.1-RC1"
 
-scalacOptions ++= Seq("-deprecation", "-unchecked")
+scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
 
 resolvers ++= Seq(
   "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",

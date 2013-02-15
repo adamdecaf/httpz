@@ -1,6 +1,7 @@
 /**
  * httpz package object
  */
+import scala.language.implicitConversions
 
 package object httpz {
 
